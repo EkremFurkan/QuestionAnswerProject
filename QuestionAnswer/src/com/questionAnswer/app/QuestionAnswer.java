@@ -42,13 +42,19 @@ public class QuestionAnswer {
 	}
 	
 	private static void askQuestion() {
-		System.out.print("Enter your question: ");
+		System.out.print("\nEnter your question: ");
 		String question = "";
 		try {
 			question = reader.readLine().trim();
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
+		
+		if(question.isBlank() || question == null) {
+			System.out.println("\nYour question is empty!");
+			return;
+		}
+		
 		List<String> answers = questionAnswerService.askQuestion(question);
 		for(String answer: answers) {
 			System.out.println("\n" + answer);
@@ -56,7 +62,7 @@ public class QuestionAnswer {
 	}
 	
 	private static void addQuestion() {
-		System.out.print("Enter your question with at least one answer: ");
+		System.out.print("\nEnter your question with at least one answer: ");
 		String questionAnswer = "";
 		try {
 			questionAnswer = reader.readLine().trim();
@@ -64,9 +70,14 @@ public class QuestionAnswer {
 	        e.printStackTrace();
 	    }
 		
+		if(questionAnswer.isBlank() || questionAnswer == null) {
+			System.out.println("\nYour question and answer is empty!");
+			return;
+		}
+		
 		boolean success = questionAnswerService.addQuestion(questionAnswer);
 		if(success) {
-			System.out.println("Question and answers added succesfully!");
+			System.out.println("\nQuestion and answers added succesfully!");
 		}
 	}
 

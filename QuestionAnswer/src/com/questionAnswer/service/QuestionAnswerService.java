@@ -52,16 +52,16 @@ public class QuestionAnswerService {
 		return true;
 	}
 	
-	private static List<String> parseAnswers(String questionAnswer){
+	private List<String> parseAnswers(String questionAnswer){
 		List<String> answers = new ArrayList<>();
 		StringBuilder buildAnswer = new StringBuilder();
 		boolean insideAnswer = false;
-		char bulletSymbol = '\u2022';
+		char bulletPointSymbol = '\u2022';
 		
 		for(char c : questionAnswer.trim().toCharArray()) {
 			if(c == '"') {
 				if (insideAnswer) {
-					answers.add(bulletSymbol + " " + buildAnswer.toString());
+					answers.add(bulletPointSymbol + " " + buildAnswer.toString());
 					buildAnswer.setLength(0);
 				}
 				insideAnswer = !insideAnswer;
